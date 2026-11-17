@@ -1,0 +1,5 @@
+# Normalize line endings: LF in the repo, checked out as-is on unix and
+# converted per-OS where git deems appropriate.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf

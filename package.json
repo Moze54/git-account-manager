@@ -1,0 +1,33 @@
+{
+  "name": "git-account-manager",
+  "version": "0.1.0",
+  "description": "Manage multiple git accounts with per-account SSH keys. Bind each repo to the right account for commits and pushes.",
+  "type": "module",
+  "bin": {
+    "gam": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "keywords": [
+    "git",
+    "ssh",
+    "multi-account",
+    "git-account",
+    "github",
+    "gitee",
+    "gitlab",
+    "cli"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0"
+  }
+}
