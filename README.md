@@ -42,7 +42,7 @@ git push ──► git@github-muzi:org/repo.git
 Requires Node.js ≥ 20.12 and `ssh`/`ssh-keygen` (preinstalled on macOS, Linux, and Git Bash on Windows).
 
 ```bash
-npm install -g git-account-manager
+npm install -g @mzbo/git-account-manager
 ```
 
 ## Quick start
