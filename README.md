@@ -70,9 +70,9 @@ Register a second account (e.g. work) and bind other repos to it — done. No gl
 
 | Command | Description |
 |---|---|
-| `gam add` | Register an account; generates or imports an SSH key. Options: `-n/--name`, `-e/--email`, `-g/--git-name`, `-p/--platform <github\|gitee\|gitlab\|custom>`, `-H/--host`, `--port`, `-k/--key <path>` (import existing key). Omit options in a terminal for interactive mode. |
+| `gam add` | Register an account; generates or imports an SSH key. Options: `-n/--name`, `-e/--email`, `-g/--git-name`, `-p/--platform <github\|gitee\|gitlab\|custom>`, `-H/--host`, `--port`, `-k/--key <path>` (import existing key), `--ssh-option <option>` (repeatable; extra ssh_config lines for this account, e.g. legacy key algorithms on self-hosted servers). Omit options in a terminal for interactive mode. |
 | `gam list` | List accounts with alias, key path and bound repo count. |
-| `gam use <account>` | Bind the current repo: writes local `user.name`/`user.email` and rewrites the remote URL (`--remote <name>` to pick a remote, default `origin`). |
+| `gam use <account>` | Bind the current repo: writes local `user.name`/`user.email` and rewrites the remote URL (`--remote <name>` to pick a remote, default `origin`; `-f/--force` allows binding a remote that points to a different host). |
 | `gam current` | Show which account the current repo is bound to. |
 | `gam pub <account>` | Print the public key to paste into your platform. |
 | `gam test <account>` | Verify platform authentication through the alias. |

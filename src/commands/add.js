@@ -13,7 +13,7 @@ function aliasFor(platform, host, name) {
 }
 
 export async function addCommand(opts) {
-  let { name, email, gitName, platform, host, port, key } = opts;
+  let { name, email, gitName, platform, host, port, key, sshOption } = opts;
 
   // Anything missing means we would need interactive prompts; refuse in
   // non-TTY contexts (scripts/CI) instead of hanging on stdin.
@@ -53,6 +53,11 @@ export async function addCommand(opts) {
   }
   gitName = gitName || name;
 
+  const extraSshOptions = (sshOption ?? []).map((s) => String(s).trim()).filter(Boolean);
+  for (const opt of extraSshOptions) {
+    if (/[\r\n]/.test(opt)) throw new Error('--ssh-option must be a single-line ssh_config directive');
+  }
+
   const keyPath = key ? importKey(key, name) : generateKey({ name, email });
   const account = {
     name,
@@ -63,6 +68,7 @@ export async function addCommand(opts) {
     port: Number(port) || 22,
     alias: aliasFor(platform, host, name),
     keyPath,
+    sshOptions: extraSshOptions,
     repos: [],
     createdAt: new Date().toISOString(),
   };
@@ -76,6 +82,9 @@ export async function addCommand(opts) {
   console.log(`  alias      : ${account.alias}`);
   console.log(`  ssh key    : ${account.keyPath}`);
   console.log(`  ssh config : ${account.alias} entry written (backup at config.bak)`);
+  if (extraSshOptions.length > 0) {
+    console.log(`  ssh opts   : ${extraSshOptions.join(' | ')}`);
+  }
   console.log();
   console.log(bold('Next steps:'));
   console.log('  1. Add this public key to your git platform:');

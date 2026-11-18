@@ -1,12 +1,12 @@
-// Parse a git remote URL into { host, path } regardless of its scheme.
-// Supports: git@host:path, ssh://git@host[:port]/path, https://host[:port]/path
+// Parse a git remote URL into { host, port, path } regardless of its scheme.
+// Supports: git@host:path, ssh://[user@]host[:port]/path, https://[user@]host[:port]/path
 export function parseRemoteUrl(url) {
-  let m = url.match(/^git@([^:/]+):(.+)$/);
-  if (m) return { host: m[1], path: m[2] };
-  m = url.match(/^ssh:\/\/git@([^/:]+)(?::\d+)?\/(.+)$/);
-  if (m) return { host: m[1], path: m[2] };
-  m = url.match(/^https?:\/\/([^/:]+)(?::\d+)?\/(.+)$/);
-  if (m) return { host: m[1], path: m[2] };
+  let m = url.match(/^[^\s@/]+@([^:/]+):(.+)$/);
+  if (m) return { host: m[1], port: null, path: m[2] };
+  m = url.match(/^ssh:\/\/(?:[^@/]+@)?([^/:]+)(?::(\d+))?\/(.+)$/);
+  if (m) return { host: m[1], port: m[2] ? Number(m[2]) : null, path: m[3] };
+  m = url.match(/^https?:\/\/(?:[^@/]+@)?([^/:]+)(?::(\d+))?\/(.+)$/);
+  if (m) return { host: m[1], port: m[2] ? Number(m[2]) : null, path: m[3] };
   return null;
 }
 

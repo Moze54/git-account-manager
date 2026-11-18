@@ -19,6 +19,8 @@ program
   .description(description)
   .version(version);
 
+const collect = (value, previous) => previous.concat([value]);
+
 program
   .command('add')
   .description('add a git account (generates or imports an SSH key)')
@@ -29,6 +31,7 @@ program
   .option('-H, --host <host>', 'git server host (custom platform)')
   .option('--port <port>', 'SSH port (custom platform, default 22)')
   .option('-k, --key <path>', 'import an existing private key instead of generating one')
+  .option('--ssh-option <option>', "extra ssh_config line for this account's Host block (repeatable)", collect, [])
   .action(addCommand);
 
 program
@@ -41,6 +44,7 @@ program
   .command('use <account>')
   .description('bind the current repo to an account (local user + remote URL)')
   .option('-r, --remote <name>', 'remote name to rewrite', 'origin')
+  .option('-f, --force', 'allow rewriting a remote that points to a different host', false)
   .action(useCommand);
 
 program

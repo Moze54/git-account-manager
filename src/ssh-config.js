@@ -51,6 +51,10 @@ export function buildHostEntry(acc) {
     `    IdentityFile ${acc.keyPath}`,
     `    IdentitiesOnly yes`,
   );
+  // Per-account extra ssh_config lines (e.g. legacy key algorithms required by
+  // self-hosted servers). Rendered inside the managed block so `gam remove`
+  // cleans them up with the rest of the entry.
+  for (const opt of acc.sshOptions ?? []) lines.push(`    ${opt}`);
   return lines.join('\n');
 }
 

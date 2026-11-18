@@ -70,9 +70,9 @@ gam use muzi
 
 | 命令 | 说明 |
 |---|---|
-| `gam add` | 注册账号；生成或导入 SSH 密钥。选项：`-n/--name`、`-e/--email`、`-g/--git-name`、`-p/--platform <github\|gitee\|gitlab\|custom>`、`-H/--host`、`--port`、`-k/--key <路径>`（导入已有密钥）。终端里省略选项即进入交互模式。 |
+| `gam add` | 注册账号；生成或导入 SSH 密钥。选项：`-n/--name`、`-e/--email`、`-g/--git-name`、`-p/--platform <github\|gitee\|gitlab\|custom>`、`-H/--host`、`--port`、`-k/--key <路径>`（导入已有密钥）、`--ssh-option <选项>`（可重复；为该账号追加 ssh_config 行，例如自建服务的旧算法兼容项）。终端里省略选项即进入交互模式。 |
 | `gam list` | 列出账号（别名、密钥路径、绑定仓库数）。 |
-| `gam use <账号>` | 绑定当前仓库：写入仓库级 `user.name`/`user.email` 并改写 remote URL（`--remote <名字>` 指定 remote，默认 `origin`）。 |
+| `gam use <账号>` | 绑定当前仓库：写入仓库级 `user.name`/`user.email` 并改写 remote URL（`--remote <名字>` 指定 remote，默认 `origin`；`-f/--force` 允许绑定指向其他主机的 remote）。 |
 | `gam current` | 显示当前仓库绑定的账号。 |
 | `gam pub <账号>` | 打印公钥（复制到平台添加）。 |
 | `gam test <账号>` | 通过别名验证平台认证。 |
